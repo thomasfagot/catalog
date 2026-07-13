@@ -14,7 +14,16 @@ readonly class VideoScraper
     public function scrape(string $url): array
     {
         $response = $this->httpClient->request('GET', $url);
-        $content = $response->getContent();
+        try {
+            $content = $response->getContent();
+        } catch (\Throwable) {
+            return [
+                'url' => $url,
+                'title' => '',
+                'description' => '',
+                'image' => null,
+            ];
+        }
 
         $crawler = new Crawler($content);
 

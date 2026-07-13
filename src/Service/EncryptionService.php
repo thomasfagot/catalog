@@ -17,8 +17,11 @@ class EncryptionService
         return base64_encode($salt . $iv . $tag . $encrypted);
     }
 
-    public function decrypt(string $encodedData, string $password): ?string
+    public function decrypt(?string $encodedData, string $password): ?string
     {
+        if (null === $encodedData || '' === $encodedData) {
+            return null;
+        }
         $decoded = base64_decode($encodedData);
         $salt = substr($decoded, 0, 16);
         $ivLength = openssl_cipher_iv_length(self::METHOD);
