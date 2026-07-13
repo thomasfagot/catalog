@@ -6,13 +6,16 @@ RUN apk --no-cache --update add \
         nano \
         curl \
         nodejs-current \
+        npm \
         unzip \
         libpq-dev \
         libzip-dev \
         zip \
         icu-data-full icu-dev \
         acl \
-    && corepack enable && corepack prepare pnpm@latest --activate
+    && npm install --global corepack@latest \
+    && corepack enable \
+    && corepack prepare pnpm@latest --activate
 
 ADD --chmod=0755 https://github.com/mlocati/docker-php-extension-installer/releases/latest/download/install-php-extensions /usr/local/bin/
 

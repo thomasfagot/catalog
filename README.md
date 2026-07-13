@@ -27,29 +27,30 @@ Toutes les données sensibles (URLs, titres, descriptions, tags, images) sont cr
 
 ### Étapes
 1. **Cloner le projet**
-2. **Lancer les conteneurs** :
+2. Générer un certificat TLS pour Nginx dans `./docker/certs/cert.pem` et `./docker/certs/key.pem`.
+3. **Lancer les conteneurs** :
    ```bash
    docker compose up -d
    ```
-3. **Installer les dépendances PHP** :
+4. **Installer les dépendances PHP** :
    ```bash
    docker compose exec app composer install
    ```
-4. **Installer les dépendances JS** :
+5. **Installer les dépendances JS** :
    ```bash
    docker compose exec app pnpm install
    ```
-5. **Initialiser la base de données** :
+6. **Initialiser la base de données** :
    ```bash
    docker compose exec app php bin/console doctrine:schema:update --force
    ```
-6. **Compiler les assets** :
+7. **Compiler les assets** :
    ```bash
    docker compose exec app pnpm run dev
    # Ou pour le rechargement à chaud :
    docker compose exec app pnpm run watch
    ```
-7. **Accès** : L'application est disponible sur `https://localhost` (ou l'IP configurée).
+8. **Accès** : L'application est disponible sur `https://localhost` (ou l'IP configurée).
 
 ## Déploiement (Production)
 
