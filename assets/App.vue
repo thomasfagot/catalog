@@ -60,7 +60,7 @@
 
         <div v-else class="form-group">
           <input v-model="registerData.username" placeholder="Nom d'utilisateur" @keyup.enter="register" />
-          <input v-model="registerData.password" type="password" placeholder="Mot de passe" @keyup.enter="register" />
+          <input v-model="registerData.password" type="password" placeholder="Mot de passe" autocomplete="new-password" @keyup.enter="register" />
           <button @click="register" :disabled="loading" class="btn btn-primary full-width">Créer un compte</button>
         </div>
         <p v-if="error" class="error">{{ error }}</p>
