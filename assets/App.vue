@@ -255,6 +255,7 @@ const closeUserMenu = () => {
 const closeAddModal = () => {
   showAddModal.value = false;
   previewData.value = null;
+  previewTags.value = '';
   newUrl.value = '';
 };
 
@@ -925,7 +926,6 @@ body {
 }
 
 .preview-row { display: flex; gap: 16px; }
-.preview-thumb-small { width: 80px; height: 80px; border-radius: 8px; object-fit: cover; }
 .preview-inputs { flex: 1; display: flex; flex-direction: column; gap: 8px; }
 
 .modal-large { max-width: 800px; }
