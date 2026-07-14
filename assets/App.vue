@@ -124,32 +124,41 @@
 
     <!-- MODAL ADD -->
     <div v-if="showAddModal" class="modal-overlay" @click.self="closeAddModal">
-      <div class="modal card">
+      <div class="modal card modal-large">
         <div class="modal-header">
           <h3>Ajouter un lien</h3>
           <button @click="closeAddModal" class="btn btn-close">×</button>
         </div>
 
-        <div class="form-group">
-          <div class="input-with-button">
-            <input v-model="newUrl" placeholder="URL (YouTube, Vimeo...)" @keyup.enter="getPreview" v-focus />
-            <button @click="getPreview" :disabled="loading" class="btn btn-secondary">Récupérer</button>
-          </div>
+          <div :class="previewData ? 'form-grid' : null">
+            <div v-if="previewData" class="form-left">
+              <div class="edit-thumb-preview">
+                <img v-if="previewData.image" :src="previewData.image"  alt="Link thumbnail"/>
+                <div v-else class="video-no-thumb">Pas d'image</div>
+              </div>
+              <label>URL de l'image</label>
+              <input v-model="previewData.image" placeholder="Image URL" @keyup.enter="addVideo" />
+            </div>
+            <div :class="previewData ? 'form-right' : 'form-group'">
+              <div class="input-with-button">
+                <input v-model="newUrl" placeholder="URL (YouTube, Vimeo...)" @keyup.enter="getPreview" v-focus />
+                <button @click="getPreview" :disabled="loading" class="btn btn-secondary">Récupérer</button>
+              </div>
 
-          <div v-if="previewData" class="preview-section fade-in">
-            <div class="preview-row">
-              <img v-if="previewData.image" :src="previewData.image" class="preview-thumb-small"  alt="Video thumbnail"/>
-              <div class="preview-inputs">
-                <input v-model="previewData.title" placeholder="Titre" @keyup.enter="addVideo" />
-                <textarea v-model="previewData.description" placeholder="Description" rows="3"></textarea>
-                <input v-model="previewTags" placeholder="Tags (séparés par des virgules)" @keyup.enter="addVideo" />
+              <div v-if="previewData" class="preview-section fade-in">
+                <div class="preview-row">
+                  <div class="preview-inputs">
+                    <input v-model="previewData.title" placeholder="Titre" @keyup.enter="addVideo" />
+                    <textarea v-model="previewData.description" placeholder="Description" rows="3"></textarea>
+                    <input v-model="previewTags" placeholder="Tags (séparés par des virgules)" @keyup.enter="addVideo" />
+                  </div>
+                </div>
+                <div class="modal-actions">
+                  <button @click="addVideo" class="btn btn-primary full-width" :disabled="loading">Enregistrer dans le catalogue</button>
+                </div>
               </div>
             </div>
-            <div class="modal-actions">
-              <button @click="addVideo" class="btn btn-primary full-width" :disabled="loading">Enregistrer dans le catalogue</button>
-            </div>
           </div>
-        </div>
       </div>
     </div>
 
